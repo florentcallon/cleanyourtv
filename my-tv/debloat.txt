@@ -1,0 +1,93 @@
+# Philips 55OLED855/12 (55" 4K OLED, 4-sided Ambilight, 2020 model), France
+# Android TV 12 (API 31), firmware STT2.230526.001 build 4215, security patch 2025-11-01
+# ro.product.model=TPM191E  ro.product.device=PH9M_EA_5599  board platform mt5887, armeabi-v7a only
+# Fingerprint: Philips/PH9M_EA_5599/PH9M_EA_5599:12/STT2.230526.001/4215:user/release-keys
+# About 2 GB RAM (MemTotal 2,155,340 kB; 375 MB available at idle on the stock home). Wi-Fi.
+#
+# Same board AND firmware build as examples/philips-tpm191e and examples/philips-75pus8505
+# (identical fingerprint); their DO NOT DISABLE notes apply here as written. This owner keeps only
+# the Google Assistant (mic button) out of the optional services and turns off everything else:
+# Chromecast, Alexa, Play-Fi, DLNA, firmware updates and every preinstalled streaming app.
+#
+# Apply:   TV_HOST=<tv ip> tools/disable.sh my-tv/debloat.txt
+# Undo:    TV_HOST=<tv ip> tools/restore.sh my-tv/debloat.txt com.google.android.tvlauncher
+# Everything is DISABLED, not uninstalled. Comment out any line you want to keep.
+#
+# Stock launcher: com.google.android.tvlauncher
+# Live TV app:    org.droidtv.playtv
+# Labels below were read from each APK (pyaxmlparser), not guessed from the package name.
+#
+# Already disabled out of the box on this French unit, so NOT listed (restore would turn them on):
+# org.droidtv.freeviewplayers and 15 uk.co.freeview.* packages.
+#
+# Display: wm size reports Physical 3840x2160 with an Override of 1920x1080 and no density override
+# (display_density_forced empty). That is how this firmware ships its UI, not a leftover experiment;
+# leave it alone.
+#
+# DO NOT DISABLE on this board (from philips-75pus8505 and philips-50pus8517, checked against this TV):
+#   org.droidtv.fastip (SOURCES drawer dies without it), org.droidtv.eum, org.droidtv.xtv,
+#   org.droidtv.ambihuecommon, org.droidtv.settings, org.droidtv.contentexplorer,
+#   org.droidtv.exoplayerservice, org.droidtv.usbbreakin, com.mediatek.backgrounddetection,
+#   org.droidtv.playtv, org.droidtv.channels, org.droidtv.GlobalKey, org.droidtv.tvsystemui,
+#   com.mediatek.tvinput, com.mediatek.tunerservice, org.droidtv.lkb ("Local Keypad", the TV's own
+#   buttons), org.droidtv.homeintentresolver, com.google.android.tv.remote.service, Play Store,
+#   Play Services, Gboard. Never start org.droidtv.factory, org.droidtv.sam or org.droidtv.csm (both
+#   "Service Alignment Mode"); dumpsys package is enough to identify them.
+
+#B1 TP Vision telemetry and retail demo. gel runs inside candeebug's process: disable both.
+org.droidtv.candeebug                     # "DAC" analytics uploader
+org.droidtv.gel                           # metrics collector sharing candeebug's process
+# org.droidtv.usagelogger                 # "UsageLogger": KEPT. It requests TV_INPUT_HARDWARE, so disable.sh skips it (#321)
+# org.droidtv.demome                      # "Demo me" shop loop: KEPT for the same TV_INPUT_HARDWARE reason
+org.droidtv.sticker                       # e-sticker and shop banners
+#B1 Google telemetry and first-setup leftovers
+com.google.android.feedback               # Market Feedback Agent
+com.google.android.partnersetup           # partner referrer / attribution
+com.google.android.onetimeinitializer     # runs once at first setup
+com.google.android.syncadapters.calendar  # Google Calendar sync, no calendar app
+
+#B2 Philips content promos, app gallery and the apps it preinstalled
+org.droidtv.nettvrecommender              # "Top Picks" content promotion row
+org.droidtv.recommendation                # its headless backend; listed after the row on purpose
+org.droidtv.nettv.market                  # "Smart TV Collection" app storefront; the Play Store stays
+org.droidtv.nettvapps                     # gallery preload installer (TV_INSTALL_PACKAGES_SILENT)
+org.droidtv.nettvapp1815                  # ARTE
+org.droidtv.nettvapp4771                  # Divan.TV
+org.droidtv.nettvapp4546                  # MEGOGO
+org.droidtv.nettvapp4655                  # Deezer
+org.droidtv.nettvapp5326                  # Toon Goggles
+org.droidtv.nettvapp5512                  # Fishing TV
+org.droidtv.nettvapp20004410              # Couchplay Games
+org.droidtv.android.fitness               # Fitness Buddy
+com.zeasn.whalelive                       # WhaleLive, ad-supported FAST channels
+
+#B3 Preinstalled streaming apps and games this owner does not use
+com.netflix.ninja                         # Netflix
+com.google.android.youtube.tv             # YouTube (SmartTube is used instead)
+com.apple.atve.androidtv.appletv          # Apple TV
+tv.wuaki.apptv                            # Rakuten TV
+com.google.android.youtube.tvmusic        # YouTube Music
+com.google.android.videos                 # Google TV / Play Movies
+fr.filmotv.philips.android.tv             # FilmoTV
+com.ted.android.tv                        # TED
+com.google.android.play.games             # Google Play Games
+com.blacknut.client                       # Blacknut cloud gaming
+com.boosteroidtv.streaming                # Boosteroid cloud gaming
+
+#B4 Services this owner does not use. The Google Assistant (katniss) is KEPT.
+com.google.android.apps.mediashell        # Chromecast built-in
+org.droidtv.amazonalexa                   # Alexa bridge
+com.phorus.playfi.tv                      # DTS Play-Fi; on this board it re-enables itself at boot
+com.phorus.playfi.softap                  # Play-Fi soft access point
+org.droidtv.oad                           # firmware download over the broadcast signal (OAD)
+com.easy.oad                              # "RC FW Update", remote-control firmware updater
+org.droidtv.dlna                          # DLNA/UPnP server and renderer
+org.droidtv.dropboxprovider               # Dropbox source for the Media browser
+com.google.android.marvin.talkback        # TalkBack screen reader
+
+#B5 After the new launcher owns Home (launcher/build-and-install.* disables com.google.android.tvlauncher).
+# tvrecommendations must go AFTER tvlauncher: the stock launcher holds a provider reference into it.
+# It also owns the notification side panel, which goes with it.
+# com.google.android.tvlauncher           # disabled by the launcher install once Home has moved
+com.google.android.tvrecommendations      # "Android TV Core Services": rows, notification panel
+com.google.android.tungsten.setupwraith   # Setup Wizard; the saved Wi-Fi network belongs to android.uid.system, not to it
