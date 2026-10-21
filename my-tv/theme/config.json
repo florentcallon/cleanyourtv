@@ -1,0 +1,8 @@
+{
+  "dock_apps": ["com.teamsmart.videomanager.tv", "com.github.damontecres.wholphin", "com.crunchyroll.crunchyroid", "com.amazon.amazonvideo.livingroom"],
+  "hidden_apps": ["org.droidtv.playtv", "org.droidtv.eum"],
+  "live_tv_package": "org.droidtv.playtv",
+  "columns": 4,
+  "background_color": "#000000",
+  "wallpaper": false
+}
