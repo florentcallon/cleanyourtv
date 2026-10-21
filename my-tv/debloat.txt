@@ -5,7 +5,12 @@
 # About 2 GB RAM (MemTotal 2,155,340 kB; 375 MB available at idle on the stock home). Wi-Fi.
 #
 # Same board AND firmware build as examples/philips-tpm191e and examples/philips-75pus8505
-# (identical fingerprint); their DO NOT DISABLE notes apply here as written. This owner keeps only
+# (identical fingerprint); their DO NOT DISABLE notes apply here as written.
+#
+# Checked after one full reboot: every package below stayed disabled except com.phorus.playfi.tv,
+# which the firmware re-enables at boot (commented out below). Home stayed on the new launcher.
+# disable.sh keeps org.droidtv.usagelogger and org.droidtv.demome on this board: both request
+# TV_INPUT_HARDWARE (#321), so they are commented out too. This owner keeps only
 # the Google Assistant (mic button) out of the optional services and turns off everything else:
 # Chromecast, Alexa, Play-Fi, DLNA, firmware updates and every preinstalled streaming app.
 #
@@ -77,7 +82,8 @@ com.boosteroidtv.streaming                # Boosteroid cloud gaming
 #B4 Services this owner does not use. The Google Assistant (katniss) is KEPT.
 com.google.android.apps.mediashell        # Chromecast built-in
 org.droidtv.amazonalexa                   # Alexa bridge
-com.phorus.playfi.tv                      # DTS Play-Fi; on this board it re-enables itself at boot
+# com.phorus.playfi.tv                    # DTS Play-Fi: RE-ENABLES ITSELF at every boot (enabled=1 after the reboot
+#                                         # check on 2026-10-21), as on philips-tpm191e and -75pus8505. Left out.
 com.phorus.playfi.softap                  # Play-Fi soft access point
 org.droidtv.oad                           # firmware download over the broadcast signal (OAD)
 com.easy.oad                              # "RC FW Update", remote-control firmware updater
