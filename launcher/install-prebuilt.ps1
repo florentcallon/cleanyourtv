@@ -6,7 +6,7 @@
 #
 # Usage: launcher\install-prebuilt.ps1 -TvHost 192.168.1.50 -Tag launcher-<commit> -Sha256 <hash>
 #        launcher\install-prebuilt.ps1 -TvHost 192.168.1.50 -Apk C:\path\app-release.apk
-#        [-Repo owner/name] [-StockLauncher <package>|none] [-InputKeyService] [-HomeKeyService]
+#        [-Repo owner/name] [-StockLauncher <package>|none] [-InputKeyService] [-HomeKeyService] [-BootHomeService]
 param(
     [string]$TvHost = $env:TV_HOST,
     [string]$Apk = '',
@@ -15,7 +15,8 @@ param(
     [string]$Repo = 'florentcallon/cleanyourtv',
     [string]$StockLauncher = '',
     [switch]$InputKeyService,
-    [switch]$HomeKeyService
+    [switch]$HomeKeyService,
+    [switch]$BootHomeService
 )
 $ErrorActionPreference = 'Stop'
 $OutputEncoding = New-Object System.Text.UTF8Encoding $false
@@ -100,4 +101,5 @@ function Enable-Service([string]$Name) {
 }
 if ($InputKeyService) { Enable-Service 'InputKeyService' }
 if ($HomeKeyService) { Enable-Service 'HomeKeyService' }
+if ($BootHomeService) { Enable-Service 'BootHomeService' }
 Write-Host 'Installed. Press Home on the remote to see it.'

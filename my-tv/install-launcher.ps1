@@ -9,6 +9,7 @@
 #   powershell -ExecutionPolicy Bypass -File install-launcher.ps1 -Tag launcher-029a9cafc0
 # The APK is downloaded, checked against the sha256 in the release notes, pushed in base64 chunks with
 # an md5 check (tools\b64push.py), installed with pm install -r, compiled, started, and made Home.
+# -BootHomeService keeps the 'Home after power-on' helper on (Live TV starts by itself after a cold boot).
 param(
     [string]$TvHost = '192.168.1.160',
     [string]$Tag = '',
@@ -28,4 +29,4 @@ $owner = (& (Join-Path $root 'repo\tools\venv\Scripts\python.exe') -I (Join-Path
     'cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME' 2>$null | Select-Object -Last 1)
 if ("$owner" -match '^com\.google\.android\.tvlauncher/') { $stock = 'com.google.android.tvlauncher' }
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $root 'repo\launcher\install-prebuilt.ps1') `
-    -TvHost $TvHost -Tag $rel.tag_name -Sha256 $sha -Repo $Repo -StockLauncher $stock
+    -TvHost $TvHost -Tag $rel.tag_name -Sha256 $sha -Repo $Repo -StockLauncher $stock -BootHomeService

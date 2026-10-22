@@ -30,6 +30,8 @@
     <string name="input_key_service_description">Le bouton Source de la télécommande ouvre le choix des sources.</string>
     <string name="home_key_name">Bouton Accueil</string>
     <string name="home_key_description">Le bouton Accueil de la télécommande ouvre ce launcher.</string>
+    <string name="boot_home_name">Accueil à l\'allumage</string>
+    <string name="boot_home_description">Revient à l\'accueil quand la TV en direct se lance toute seule juste après l\'allumage.</string>
     <string name="card_prompt_title">Nouvelle carte de %1$s</string>
     <string name="card_prompt_body">%1$s peut afficher une carte sur votre écran d\'accueil. Si vous la masquez, la tuile habituelle de l\'appli reste inchangée.</string>
     <string name="card_prompt_names">La carte s\'appelle « %1$s ». L\'appli s\'appelle « %2$s ».</string>
