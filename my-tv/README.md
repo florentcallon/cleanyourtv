@@ -25,9 +25,15 @@ Fait le 21/10/2026 à partir du dépôt [cleanyourtv](https://github.com/Gathin2
   Ambilight et le navigateur Multimédia (USB). Tes applis à toi n'ont pas été touchées.
 - **Nouveau launcher** façon Apple TV (code du dépôt, compilé par GitHub Actions sur ton fork) :
   dock **SmartTube · Wholphin · Crunchyroll · Prime Video**, grille de 4 colonnes, pastilles
-  Sources / Wi-Fi / Paramètres. Wholphin (`com.github.damontecres.wholphin`) prend sa place dans le
-  dock dès que tu l'installes ; d'ici là, la case est occupée par la première appli de la grille.
+  Sources / Wi-Fi / Paramètres. SmartTube beta est `org.smarttube.beta`, Wholphin `com.github.damontecres.wholphin`.
 - **DNS anti-pub** : DNS privé Android sur `dns.adguard-dns.com`. Il ne bloque pas les pubs YouTube.
+- **Heure automatique** activée (elle était coupée d'usine), avec un serveur de temps donné par son IP
+  (`ntp_server 216.239.35.4`). Après une coupure de courant, la TV revenait au 9 décembre 2025, le DNS
+  chiffré refusait alors de fonctionner et le Wi-Fi passait en « limité ». C'est corrigé.
+- **Accueil à l'allumage** : après une extinction complète, l'appli TV de Philips se relance toujours sur
+  la dernière source, sans réglage pour l'en empêcher. Le service d'accessibilité « Accueil à
+  l'allumage » du launcher appuie alors une fois sur Accueil (seulement dans les 2 minutes qui suivent
+  un démarrage). Pour le couper : Paramètres → Préférences de l'appareil → Accessibilité.
 - Mémoire disponible au repos : **375 Mo avant, ~650 à 716 Mo après**.
 
 ### Ce qui ne s'est pas laissé faire
